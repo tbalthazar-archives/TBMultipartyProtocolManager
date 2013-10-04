@@ -16,8 +16,8 @@
 		330764B517FF028A00AE0A59 /* libTBMultipartyProtocolManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3307649D17FF028A00AE0A59 /* libTBMultipartyProtocolManager.a */; };
 		330764BB17FF028A00AE0A59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 330764B917FF028A00AE0A59 /* InfoPlist.strings */; };
 		330764BD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */; };
-		330764CB17FF045000AE0A59 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764CA17FF045000AE0A59 /* NSData+Base64.m */; };
-		330764CD17FF046000AE0A59 /* curve25519-donna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330764CC17FF046000AE0A59 /* curve25519-donna.a */; };
+		330764CF17FF059D00AE0A59 /* curve25519-donna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330764CE17FF059D00AE0A59 /* curve25519-donna.a */; };
+		330764D217FF05A700AE0A59 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764D117FF05A700AE0A59 /* NSData+Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,9 +55,9 @@
 		330764B817FF028A00AE0A59 /* TBMultipartyProtocolManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TBMultipartyProtocolManagerTests-Info.plist"; sourceTree = "<group>"; };
 		330764BA17FF028A00AE0A59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMultipartyProtocolManagerTests.m; sourceTree = "<group>"; };
-		330764C917FF045000AE0A59 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		330764CA17FF045000AE0A59 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		330764CC17FF046000AE0A59 /* curve25519-donna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "curve25519-donna.a"; sourceTree = "<group>"; };
+		330764CE17FF059D00AE0A59 /* curve25519-donna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "curve25519-donna.a"; path = "dependencies/lib/curve25519-donna.a"; sourceTree = "<group>"; };
+		330764D017FF05A700AE0A59 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "dependencies/NSData+Base64.h"; sourceTree = "<group>"; };
+		330764D117FF05A700AE0A59 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "dependencies/NSData+Base64.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				330764A117FF028A00AE0A59 /* Foundation.framework in Frameworks */,
-				330764CD17FF046000AE0A59 /* curve25519-donna.a in Frameworks */,
+				330764CF17FF059D00AE0A59 /* curve25519-donna.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,8 +162,8 @@
 		330764C717FF043600AE0A59 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				330764C917FF045000AE0A59 /* NSData+Base64.h */,
-				330764CA17FF045000AE0A59 /* NSData+Base64.m */,
+				330764D017FF05A700AE0A59 /* NSData+Base64.h */,
+				330764D117FF05A700AE0A59 /* NSData+Base64.m */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -171,7 +171,7 @@
 		330764C817FF044000AE0A59 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				330764CC17FF046000AE0A59 /* curve25519-donna.a */,
+				330764CE17FF059D00AE0A59 /* curve25519-donna.a */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -258,7 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				330764A817FF028A00AE0A59 /* TBMultipartyProtocolManager.m in Sources */,
-				330764CB17FF045000AE0A59 /* NSData+Base64.m in Sources */,
+				330764D217FF05A700AE0A59 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +371,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/tba/Documents/dev/code/Cryptocat/TBMultipartyProtocolManager/TBMultipartyProtocolManager,
+					/Users/tba/Documents/dev/code/Cryptocat/TBMultipartyProtocolManager/TBMultipartyProtocolManager/dependencies/lib,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -387,6 +388,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/tba/Documents/dev/code/Cryptocat/TBMultipartyProtocolManager/TBMultipartyProtocolManager,
+					/Users/tba/Documents/dev/code/Cryptocat/TBMultipartyProtocolManager/TBMultipartyProtocolManager/dependencies/lib,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
