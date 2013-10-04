@@ -13,4 +13,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TBMultipartyProtocolManager : NSObject
 
+@property (nonatomic, readonly) NSString *privateKey;
+@property (nonatomic, readonly) NSString *publicKey;
+
++ (TBMultipartyProtocolManager *)sharedMultipartyProtocolManager;
+
 @end
