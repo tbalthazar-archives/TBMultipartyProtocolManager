@@ -16,6 +16,8 @@
 		330764B517FF028A00AE0A59 /* libTBMultipartyProtocolManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3307649D17FF028A00AE0A59 /* libTBMultipartyProtocolManager.a */; };
 		330764BB17FF028A00AE0A59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 330764B917FF028A00AE0A59 /* InfoPlist.strings */; };
 		330764BD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */; };
+		330764CB17FF045000AE0A59 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764CA17FF045000AE0A59 /* NSData+Base64.m */; };
+		330764CD17FF046000AE0A59 /* curve25519-donna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 330764CC17FF046000AE0A59 /* curve25519-donna.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,9 @@
 		330764B817FF028A00AE0A59 /* TBMultipartyProtocolManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TBMultipartyProtocolManagerTests-Info.plist"; sourceTree = "<group>"; };
 		330764BA17FF028A00AE0A59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMultipartyProtocolManagerTests.m; sourceTree = "<group>"; };
+		330764C917FF045000AE0A59 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		330764CA17FF045000AE0A59 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		330764CC17FF046000AE0A59 /* curve25519-donna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "curve25519-donna.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				330764A117FF028A00AE0A59 /* Foundation.framework in Frameworks */,
+				330764CD17FF046000AE0A59 /* curve25519-donna.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +116,7 @@
 		330764A217FF028A00AE0A59 /* TBMultipartyProtocolManager */ = {
 			isa = PBXGroup;
 			children = (
+				330764C617FF042D00AE0A59 /* dependencies */,
 				330764A517FF028A00AE0A59 /* TBMultipartyProtocolManager.h */,
 				330764A717FF028A00AE0A59 /* TBMultipartyProtocolManager.m */,
 				330764A317FF028A00AE0A59 /* Supporting Files */,
@@ -141,6 +148,32 @@
 				330764B917FF028A00AE0A59 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		330764C617FF042D00AE0A59 /* dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				330764C717FF043600AE0A59 /* include */,
+				330764C817FF044000AE0A59 /* lib */,
+			);
+			name = dependencies;
+			sourceTree = "<group>";
+		};
+		330764C717FF043600AE0A59 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				330764C917FF045000AE0A59 /* NSData+Base64.h */,
+				330764CA17FF045000AE0A59 /* NSData+Base64.m */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		330764C817FF044000AE0A59 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				330764CC17FF046000AE0A59 /* curve25519-donna.a */,
+			);
+			name = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				330764A817FF028A00AE0A59 /* TBMultipartyProtocolManager.m in Sources */,
+				330764CB17FF045000AE0A59 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +368,10 @@
 				DSTROOT = /tmp/TBMultipartyProtocolManager.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TBMultipartyProtocolManager/TBMultipartyProtocolManager-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/tba/Documents/dev/code/Cryptocat/TBMultipartyProtocolManager/TBMultipartyProtocolManager,
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -346,6 +384,10 @@
 				DSTROOT = /tmp/TBMultipartyProtocolManager.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TBMultipartyProtocolManager/TBMultipartyProtocolManager-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/tba/Documents/dev/code/Cryptocat/TBMultipartyProtocolManager/TBMultipartyProtocolManager,
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
