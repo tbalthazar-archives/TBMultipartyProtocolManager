@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		330764A117FF028A00AE0A59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330764A017FF028A00AE0A59 /* Foundation.framework */; };
+		330764A617FF028A00AE0A59 /* TBMultipartyProtocolManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 330764A517FF028A00AE0A59 /* TBMultipartyProtocolManager.h */; };
+		330764A817FF028A00AE0A59 /* TBMultipartyProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764A717FF028A00AE0A59 /* TBMultipartyProtocolManager.m */; };
+		330764AF17FF028A00AE0A59 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330764AE17FF028A00AE0A59 /* XCTest.framework */; };
+		330764B017FF028A00AE0A59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330764A017FF028A00AE0A59 /* Foundation.framework */; };
+		330764B217FF028A00AE0A59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330764B117FF028A00AE0A59 /* UIKit.framework */; };
+		330764B517FF028A00AE0A59 /* libTBMultipartyProtocolManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3307649D17FF028A00AE0A59 /* libTBMultipartyProtocolManager.a */; };
+		330764BB17FF028A00AE0A59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 330764B917FF028A00AE0A59 /* InfoPlist.strings */; };
+		330764BD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		330764B317FF028A00AE0A59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3307649517FF028A00AE0A59 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3307649C17FF028A00AE0A59;
+			remoteInfo = TBMultipartyProtocolManager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3307649B17FF028A00AE0A59 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				330764A617FF028A00AE0A59 /* TBMultipartyProtocolManager.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3307649D17FF028A00AE0A59 /* libTBMultipartyProtocolManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTBMultipartyProtocolManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		330764A017FF028A00AE0A59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		330764A417FF028A00AE0A59 /* TBMultipartyProtocolManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TBMultipartyProtocolManager-Prefix.pch"; sourceTree = "<group>"; };
+		330764A517FF028A00AE0A59 /* TBMultipartyProtocolManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBMultipartyProtocolManager.h; sourceTree = "<group>"; };
+		330764A717FF028A00AE0A59 /* TBMultipartyProtocolManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMultipartyProtocolManager.m; sourceTree = "<group>"; };
+		330764AD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TBMultipartyProtocolManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		330764AE17FF028A00AE0A59 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		330764B117FF028A00AE0A59 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		330764B817FF028A00AE0A59 /* TBMultipartyProtocolManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TBMultipartyProtocolManagerTests-Info.plist"; sourceTree = "<group>"; };
+		330764BA17FF028A00AE0A59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMultipartyProtocolManagerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3307649A17FF028A00AE0A59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330764A117FF028A00AE0A59 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		330764AA17FF028A00AE0A59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330764B517FF028A00AE0A59 /* libTBMultipartyProtocolManager.a in Frameworks */,
+				330764AF17FF028A00AE0A59 /* XCTest.framework in Frameworks */,
+				330764B217FF028A00AE0A59 /* UIKit.framework in Frameworks */,
+				330764B017FF028A00AE0A59 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3307649417FF028A00AE0A59 = {
+			isa = PBXGroup;
+			children = (
+				330764A217FF028A00AE0A59 /* TBMultipartyProtocolManager */,
+				330764B617FF028A00AE0A59 /* TBMultipartyProtocolManagerTests */,
+				3307649F17FF028A00AE0A59 /* Frameworks */,
+				3307649E17FF028A00AE0A59 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3307649E17FF028A00AE0A59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3307649D17FF028A00AE0A59 /* libTBMultipartyProtocolManager.a */,
+				330764AD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3307649F17FF028A00AE0A59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				330764A017FF028A00AE0A59 /* Foundation.framework */,
+				330764AE17FF028A00AE0A59 /* XCTest.framework */,
+				330764B117FF028A00AE0A59 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		330764A217FF028A00AE0A59 /* TBMultipartyProtocolManager */ = {
+			isa = PBXGroup;
+			children = (
+				330764A517FF028A00AE0A59 /* TBMultipartyProtocolManager.h */,
+				330764A717FF028A00AE0A59 /* TBMultipartyProtocolManager.m */,
+				330764A317FF028A00AE0A59 /* Supporting Files */,
+			);
+			path = TBMultipartyProtocolManager;
+			sourceTree = "<group>";
+		};
+		330764A317FF028A00AE0A59 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				330764A417FF028A00AE0A59 /* TBMultipartyProtocolManager-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		330764B617FF028A00AE0A59 /* TBMultipartyProtocolManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */,
+				330764B717FF028A00AE0A59 /* Supporting Files */,
+			);
+			path = TBMultipartyProtocolManagerTests;
+			sourceTree = "<group>";
+		};
+		330764B717FF028A00AE0A59 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				330764B817FF028A00AE0A59 /* TBMultipartyProtocolManagerTests-Info.plist */,
+				330764B917FF028A00AE0A59 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3307649C17FF028A00AE0A59 /* TBMultipartyProtocolManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 330764C017FF028A00AE0A59 /* Build configuration list for PBXNativeTarget "TBMultipartyProtocolManager" */;
+			buildPhases = (
+				3307649917FF028A00AE0A59 /* Sources */,
+				3307649A17FF028A00AE0A59 /* Frameworks */,
+				3307649B17FF028A00AE0A59 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TBMultipartyProtocolManager;
+			productName = TBMultipartyProtocolManager;
+			productReference = 3307649D17FF028A00AE0A59 /* libTBMultipartyProtocolManager.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		330764AC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 330764C317FF028A00AE0A59 /* Build configuration list for PBXNativeTarget "TBMultipartyProtocolManagerTests" */;
+			buildPhases = (
+				330764A917FF028A00AE0A59 /* Sources */,
+				330764AA17FF028A00AE0A59 /* Frameworks */,
+				330764AB17FF028A00AE0A59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				330764B417FF028A00AE0A59 /* PBXTargetDependency */,
+			);
+			name = TBMultipartyProtocolManagerTests;
+			productName = TBMultipartyProtocolManagerTests;
+			productReference = 330764AD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3307649517FF028A00AE0A59 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Thomas Balthazar";
+			};
+			buildConfigurationList = 3307649817FF028A00AE0A59 /* Build configuration list for PBXProject "TBMultipartyProtocolManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3307649417FF028A00AE0A59;
+			productRefGroup = 3307649E17FF028A00AE0A59 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3307649C17FF028A00AE0A59 /* TBMultipartyProtocolManager */,
+				330764AC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		330764AB17FF028A00AE0A59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330764BB17FF028A00AE0A59 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3307649917FF028A00AE0A59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330764A817FF028A00AE0A59 /* TBMultipartyProtocolManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		330764A917FF028A00AE0A59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				330764BD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		330764B417FF028A00AE0A59 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3307649C17FF028A00AE0A59 /* TBMultipartyProtocolManager */;
+			targetProxy = 330764B317FF028A00AE0A59 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		330764B917FF028A00AE0A59 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				330764BA17FF028A00AE0A59 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		330764BE17FF028A00AE0A59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		330764BF17FF028A00AE0A59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		330764C117FF028A00AE0A59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TBMultipartyProtocolManager.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TBMultipartyProtocolManager/TBMultipartyProtocolManager-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		330764C217FF028A00AE0A59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TBMultipartyProtocolManager.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TBMultipartyProtocolManager/TBMultipartyProtocolManager-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		330764C417FF028A00AE0A59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TBMultipartyProtocolManager/TBMultipartyProtocolManager-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TBMultipartyProtocolManagerTests/TBMultipartyProtocolManagerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		330764C517FF028A00AE0A59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TBMultipartyProtocolManager/TBMultipartyProtocolManager-Prefix.pch";
+				INFOPLIST_FILE = "TBMultipartyProtocolManagerTests/TBMultipartyProtocolManagerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3307649817FF028A00AE0A59 /* Build configuration list for PBXProject "TBMultipartyProtocolManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				330764BE17FF028A00AE0A59 /* Debug */,
+				330764BF17FF028A00AE0A59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		330764C017FF028A00AE0A59 /* Build configuration list for PBXNativeTarget "TBMultipartyProtocolManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				330764C117FF028A00AE0A59 /* Debug */,
+				330764C217FF028A00AE0A59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		330764C317FF028A00AE0A59 /* Build configuration list for PBXNativeTarget "TBMultipartyProtocolManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				330764C417FF028A00AE0A59 /* Debug */,
+				330764C517FF028A00AE0A59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3307649517FF028A00AE0A59 /* Project object */;
+}
