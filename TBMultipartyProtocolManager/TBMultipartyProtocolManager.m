@@ -10,6 +10,7 @@
 #import "curve25519-donna.h"
 #import "NSData+Base64.h"
 #import "NSString+TBMultipartyProtocolManager.h"
+#import <CommonCrypto/CommonDigest.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,6 +20,9 @@
 @property (nonatomic, strong, readwrite) NSString *privateKey;
 @property (nonatomic, strong, readwrite) NSString *publicKey;
 @property (nonatomic, strong) NSMutableDictionary *publicKeys;
+@property (nonatomic, strong) NSMutableDictionary *sharedSecrets;
+
+- (NSString *)generateSharedSecretForUsername:(NSString *)username;
 
 @end
 
@@ -64,10 +68,43 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
     _publicKey = [publicKeyData base64EncodedString];
     
     _publicKeys = [NSMutableDictionary dictionary];
+    _sharedSecrets = [NSMutableDictionary dictionary];
     _myName = nil;
   }
   
   return self;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark Private Methods
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSString *)generateSharedSecretForUsername:(NSString *)username {
+  // keys are stored base64 encoded
+  NSData *decodedPublicKey = [NSData dataFromBase64String:self.publicKey];
+  NSData *decodedPrivateKey = [NSData dataFromBase64String:self.privateKey];
+  
+  const void *public_key_bytes = [decodedPublicKey bytes];
+  uint8_t *public_key = (uint8_t *)public_key_bytes;
+
+  const void *private_key_bytes = [decodedPrivateKey bytes];
+  uint8_t *private_key = (uint8_t *)private_key_bytes;
+  
+  uint8_t shared_secret[32];
+  curve25519_donna(shared_secret, private_key, public_key);
+  
+  NSData *sharedSecretData = [NSData dataWithBytes:shared_secret length:sizeof(shared_secret)];
+  NSLog(@"-- sharedSecretData %@ | %d bytes", sharedSecretData, sharedSecretData.length);
+  
+  // sha512 the shared secret
+  uint8_t digest[CC_SHA512_DIGEST_LENGTH] = {0};
+  CC_SHA512(sharedSecretData.bytes, sharedSecretData.length, digest);
+  sharedSecretData = [NSData dataWithBytes:digest length:CC_SHA512_DIGEST_LENGTH];
+  NSLog(@"-- sharedSecretData %@ | %d bytes", sharedSecretData, sharedSecretData.length);
+  
+  return [sharedSecretData base64EncodedString];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +143,11 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
   // get public key
   NSString *publicKey = [[[JSONDic objectForKey:@"text"]
                          objectForKey:myName] objectForKey:@"message"];
-  [self.publicKeys setObject:publicKey forKey:username];
+  
+  if ([self.publicKeys objectForKey:username]==nil) {
+    [self.publicKeys setObject:publicKey forKey:username];
+    [self.sharedSecrets setObject:[self generateSharedSecretForUsername:username] forKey:username];
+  }
   
   return YES;
 }
