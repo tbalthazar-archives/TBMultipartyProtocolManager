@@ -8,7 +8,6 @@
 
 #import "TBMultipartyProtocolManager.h"
 #import "curve25519-donna.h"
-#import "NSData+Base64.h"
 #import "NSString+TBMultipartyProtocolManager.h"
 #import <CommonCrypto/CommonDigest.h>
 
@@ -21,8 +20,10 @@
 @property (nonatomic, strong, readwrite) NSString *publicKey;
 @property (nonatomic, strong) NSMutableDictionary *publicKeys;
 @property (nonatomic, strong) NSMutableDictionary *sharedSecrets;
+@property (nonatomic, strong) NSMutableDictionary *fingerprints;
 
 - (NSString *)generateSharedSecretForUsername:(NSString *)username;
+- (NSString *)generateFingerprintForUsername:(NSString *)username;
 
 @end
 
@@ -64,11 +65,14 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
     NSData *publicKeyData = [NSData dataWithBytes:public_key length:sizeof(public_key)];
     NSData *privateKeyData = [NSData dataWithBytes:private_key length:sizeof(private_key)];
     
-    _privateKey = [privateKeyData base64EncodedString];
-    _publicKey = [publicKeyData base64EncodedString];
+    _privateKey = [privateKeyData
+                   base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    _publicKey = [publicKeyData
+                  base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     _publicKeys = [NSMutableDictionary dictionary];
     _sharedSecrets = [NSMutableDictionary dictionary];
+    _fingerprints = [NSMutableDictionary dictionary];
     _myName = nil;
   }
   
@@ -83,8 +87,10 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSString *)generateSharedSecretForUsername:(NSString *)username {
   // keys are stored base64 encoded
-  NSData *decodedPublicKey = [NSData dataFromBase64String:self.publicKey];
-  NSData *decodedPrivateKey = [NSData dataFromBase64String:self.privateKey];
+  NSData *decodedPublicKey = [[NSData alloc] initWithBase64EncodedString:self.publicKey
+                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+  NSData *decodedPrivateKey = [[NSData alloc] initWithBase64EncodedString:self.privateKey
+                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
   
   const void *public_key_bytes = [decodedPublicKey bytes];
   uint8_t *public_key = (uint8_t *)public_key_bytes;
@@ -104,7 +110,25 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
   sharedSecretData = [NSData dataWithBytes:digest length:CC_SHA512_DIGEST_LENGTH];
   NSLog(@"-- sharedSecretData %@ | %d bytes", sharedSecretData, sharedSecretData.length);
   
-  return [sharedSecretData base64EncodedString];
+  //return [sharedSecretData base64EncodedString];
+  return [sharedSecretData
+          base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSString *)generateFingerprintForUsername:(NSString *)username {
+  NSData *publicKeyData = [[NSData alloc] initWithBase64EncodedString:self.publicKey
+                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+
+  uint8_t digest[CC_SHA512_DIGEST_LENGTH] = {0};
+  CC_SHA512(publicKeyData.bytes, publicKeyData.length, digest);
+  publicKeyData = [NSData dataWithBytes:digest length:CC_SHA512_DIGEST_LENGTH];
+  NSLog(@"-- publicKeyData %@ | %d bytes", publicKeyData, publicKeyData.length);
+  
+  NSString *fingerprint = [publicKeyData
+                          base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  
+  return [fingerprint substringWithRange:NSMakeRange(0, 40)];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +171,7 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
   if ([self.publicKeys objectForKey:username]==nil) {
     [self.publicKeys setObject:publicKey forKey:username];
     [self.sharedSecrets setObject:[self generateSharedSecretForUsername:username] forKey:username];
+    [self.fingerprints setObject:[self generateFingerprintForUsername:username] forKey:username];
   }
   
   return YES;

@@ -16,7 +16,6 @@
 		330764B517FF028A00AE0A59 /* libTBMultipartyProtocolManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3307649D17FF028A00AE0A59 /* libTBMultipartyProtocolManager.a */; };
 		330764BB17FF028A00AE0A59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 330764B917FF028A00AE0A59 /* InfoPlist.strings */; };
 		330764BD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */; };
-		330764D217FF05A700AE0A59 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764D117FF05A700AE0A59 /* NSData+Base64.m */; };
 		333D714217FF1E1D00E245A4 /* curve25519-donna.c in Sources */ = {isa = PBXBuildFile; fileRef = 333D714017FF1E1D00E245A4 /* curve25519-donna.c */; };
 		333D71461802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D71451802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m */; };
 /* End PBXBuildFile section */
@@ -56,8 +55,6 @@
 		330764B817FF028A00AE0A59 /* TBMultipartyProtocolManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TBMultipartyProtocolManagerTests-Info.plist"; sourceTree = "<group>"; };
 		330764BA17FF028A00AE0A59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMultipartyProtocolManagerTests.m; sourceTree = "<group>"; };
-		330764D017FF05A700AE0A59 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "dependencies/NSData+Base64.h"; sourceTree = "<group>"; };
-		330764D117FF05A700AE0A59 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "dependencies/NSData+Base64.m"; sourceTree = "<group>"; };
 		333D714017FF1E1D00E245A4 /* curve25519-donna.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "curve25519-donna.c"; path = "dependencies/curve25519-donna.c"; sourceTree = "<group>"; };
 		333D714117FF1E1D00E245A4 /* curve25519-donna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "curve25519-donna.h"; path = "dependencies/curve25519-donna.h"; sourceTree = "<group>"; };
 		333D71441802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TBMultipartyProtocolManager.h"; sourceTree = "<group>"; };
@@ -167,8 +164,6 @@
 			children = (
 				333D714117FF1E1D00E245A4 /* curve25519-donna.h */,
 				333D714017FF1E1D00E245A4 /* curve25519-donna.c */,
-				330764D017FF05A700AE0A59 /* NSData+Base64.h */,
-				330764D117FF05A700AE0A59 /* NSData+Base64.m */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -264,7 +259,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				330764A817FF028A00AE0A59 /* TBMultipartyProtocolManager.m in Sources */,
-				330764D217FF05A700AE0A59 /* NSData+Base64.m in Sources */,
 				333D71461802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m in Sources */,
 				333D714217FF1E1D00E245A4 /* curve25519-donna.c in Sources */,
 			);
