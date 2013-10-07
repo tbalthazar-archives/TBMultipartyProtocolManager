@@ -18,6 +18,7 @@
 		330764BD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */; };
 		330764D217FF05A700AE0A59 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764D117FF05A700AE0A59 /* NSData+Base64.m */; };
 		333D714217FF1E1D00E245A4 /* curve25519-donna.c in Sources */ = {isa = PBXBuildFile; fileRef = 333D714017FF1E1D00E245A4 /* curve25519-donna.c */; };
+		333D71461802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D71451802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		330764D117FF05A700AE0A59 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "dependencies/NSData+Base64.m"; sourceTree = "<group>"; };
 		333D714017FF1E1D00E245A4 /* curve25519-donna.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "curve25519-donna.c"; path = "dependencies/curve25519-donna.c"; sourceTree = "<group>"; };
 		333D714117FF1E1D00E245A4 /* curve25519-donna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "curve25519-donna.h"; path = "dependencies/curve25519-donna.h"; sourceTree = "<group>"; };
+		333D71441802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TBMultipartyProtocolManager.h"; sourceTree = "<group>"; };
+		333D71451802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TBMultipartyProtocolManager.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,7 @@
 		330764A217FF028A00AE0A59 /* TBMultipartyProtocolManager */ = {
 			isa = PBXGroup;
 			children = (
+				333D71431802B34100E245A4 /* categories */,
 				330764C617FF042D00AE0A59 /* dependencies */,
 				330764A517FF028A00AE0A59 /* TBMultipartyProtocolManager.h */,
 				330764A717FF028A00AE0A59 /* TBMultipartyProtocolManager.m */,
@@ -167,6 +171,15 @@
 				330764D117FF05A700AE0A59 /* NSData+Base64.m */,
 			);
 			name = include;
+			sourceTree = "<group>";
+		};
+		333D71431802B34100E245A4 /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				333D71441802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.h */,
+				333D71451802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m */,
+			);
+			name = categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +265,7 @@
 			files = (
 				330764A817FF028A00AE0A59 /* TBMultipartyProtocolManager.m in Sources */,
 				330764D217FF05A700AE0A59 /* NSData+Base64.m in Sources */,
+				333D71461802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m in Sources */,
 				333D714217FF1E1D00E245A4 /* curve25519-donna.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
