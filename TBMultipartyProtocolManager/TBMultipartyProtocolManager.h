@@ -15,7 +15,11 @@
 
 @property (nonatomic, readonly) NSString *privateKey;
 @property (nonatomic, readonly) NSString *publicKey;
+@property (nonatomic, strong) NSString *myName;
 
 + (TBMultipartyProtocolManager *)sharedMultipartyProtocolManager;
+
+- (NSString *)publicKeyMessageForUsername:(NSString *)username;
+- (BOOL)addPublicKeyFromMessage:(NSString *)publicKeyMessage forUsername:(NSString *)username;
 
 @end
