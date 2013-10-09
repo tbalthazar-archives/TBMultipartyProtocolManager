@@ -10,5 +10,6 @@ Pod::Spec.new do |s|
 
   s.public_header_files = 'TBMultipartyProtocolManager/TBMultipartyProtocolManager.h'  
   s.source_files = "TBMultipartyProtocolManager/**/*.{h,m,c}"
+  s.header_mappings_dir = "TBMultipartyProtocolManager/dependencies/include"
   s.vendored_library = 'TBMultipartyProtocolManager/dependencies/lib/*.a'
 end
