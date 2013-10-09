@@ -7,12 +7,14 @@
 //
 
 #import "TBMultipartyProtocolManager.h"
-#import "curve25519-donna.h"
 #import "NSString+TBMultipartyProtocolManager.h"
 #import <CommonCrypto/CommonDigest.h>
 
-#import "md5.h"
+//#import <curve25519/curve25519-donna.h>
 //#import <openssl/md5.h>
+
+#import "curve25519-donna.h"
+#import "md5.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
