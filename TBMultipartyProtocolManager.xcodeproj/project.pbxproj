@@ -20,6 +20,81 @@
 		33433C541805A6220099B1AA /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33433C521805A6220099B1AA /* libcrypto.a */; };
 		33433C551805A6220099B1AA /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33433C531805A6220099B1AA /* libssl.a */; };
 		33433CA51805A6460099B1AA /* curve25519-donna.c in Sources */ = {isa = PBXBuildFile; fileRef = 33433C571805A6460099B1AA /* curve25519-donna.c */; };
+		33433CA61805BC040099B1AA /* aes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C5A1805A6460099B1AA /* aes.h */; };
+		33433CA71805BC040099B1AA /* asn1.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C5B1805A6460099B1AA /* asn1.h */; };
+		33433CA81805BC040099B1AA /* asn1_mac.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C5C1805A6460099B1AA /* asn1_mac.h */; };
+		33433CA91805BC040099B1AA /* asn1t.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C5D1805A6460099B1AA /* asn1t.h */; };
+		33433CAA1805BC040099B1AA /* bio.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C5E1805A6460099B1AA /* bio.h */; };
+		33433CAB1805BC040099B1AA /* blowfish.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C5F1805A6460099B1AA /* blowfish.h */; };
+		33433CAC1805BC040099B1AA /* bn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C601805A6460099B1AA /* bn.h */; };
+		33433CAD1805BC040099B1AA /* buffer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C611805A6460099B1AA /* buffer.h */; };
+		33433CAE1805BC040099B1AA /* camellia.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C621805A6460099B1AA /* camellia.h */; };
+		33433CAF1805BC040099B1AA /* cast.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C631805A6460099B1AA /* cast.h */; };
+		33433CB01805BC040099B1AA /* cmac.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C641805A6460099B1AA /* cmac.h */; };
+		33433CB11805BC040099B1AA /* cms.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C651805A6460099B1AA /* cms.h */; };
+		33433CB21805BC040099B1AA /* comp.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C661805A6460099B1AA /* comp.h */; };
+		33433CB31805BC040099B1AA /* conf.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C671805A6460099B1AA /* conf.h */; };
+		33433CB41805BC040099B1AA /* conf_api.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C681805A6460099B1AA /* conf_api.h */; };
+		33433CB51805BC040099B1AA /* crypto.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C691805A6460099B1AA /* crypto.h */; };
+		33433CB61805BC040099B1AA /* des.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C6A1805A6460099B1AA /* des.h */; };
+		33433CB71805BC040099B1AA /* des_old.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C6B1805A6460099B1AA /* des_old.h */; };
+		33433CB81805BC040099B1AA /* dh.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C6C1805A6460099B1AA /* dh.h */; };
+		33433CB91805BC040099B1AA /* dsa.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C6D1805A6460099B1AA /* dsa.h */; };
+		33433CBA1805BC040099B1AA /* dso.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C6E1805A6460099B1AA /* dso.h */; };
+		33433CBB1805BC040099B1AA /* dtls1.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C6F1805A6460099B1AA /* dtls1.h */; };
+		33433CBC1805BC040099B1AA /* e_os2.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C701805A6460099B1AA /* e_os2.h */; };
+		33433CBD1805BC040099B1AA /* ebcdic.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C711805A6460099B1AA /* ebcdic.h */; };
+		33433CBE1805BC040099B1AA /* ec.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C721805A6460099B1AA /* ec.h */; };
+		33433CBF1805BC040099B1AA /* ecdh.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C731805A6460099B1AA /* ecdh.h */; };
+		33433CC01805BC040099B1AA /* ecdsa.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C741805A6460099B1AA /* ecdsa.h */; };
+		33433CC11805BC040099B1AA /* engine.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C751805A6460099B1AA /* engine.h */; };
+		33433CC21805BC040099B1AA /* err.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C761805A6460099B1AA /* err.h */; };
+		33433CC31805BC040099B1AA /* evp.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C771805A6460099B1AA /* evp.h */; };
+		33433CC41805BC040099B1AA /* hmac.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C781805A6460099B1AA /* hmac.h */; };
+		33433CC51805BC040099B1AA /* idea.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C791805A6460099B1AA /* idea.h */; };
+		33433CC61805BC040099B1AA /* krb5_asn.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C7A1805A6460099B1AA /* krb5_asn.h */; };
+		33433CC71805BC040099B1AA /* kssl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C7B1805A6460099B1AA /* kssl.h */; };
+		33433CC81805BC040099B1AA /* lhash.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C7C1805A6460099B1AA /* lhash.h */; };
+		33433CC91805BC040099B1AA /* md4.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C7D1805A6460099B1AA /* md4.h */; };
+		33433CCA1805BC040099B1AA /* md5.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C7E1805A6460099B1AA /* md5.h */; };
+		33433CCB1805BC040099B1AA /* mdc2.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C7F1805A6460099B1AA /* mdc2.h */; };
+		33433CCC1805BC040099B1AA /* modes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C801805A6460099B1AA /* modes.h */; };
+		33433CCD1805BC040099B1AA /* obj_mac.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C811805A6460099B1AA /* obj_mac.h */; };
+		33433CCE1805BC040099B1AA /* objects.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C821805A6460099B1AA /* objects.h */; };
+		33433CCF1805BC040099B1AA /* ocsp.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C831805A6460099B1AA /* ocsp.h */; };
+		33433CD01805BC040099B1AA /* opensslconf.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C841805A6460099B1AA /* opensslconf.h */; };
+		33433CD11805BC040099B1AA /* opensslv.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C851805A6460099B1AA /* opensslv.h */; };
+		33433CD21805BC040099B1AA /* ossl_typ.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C861805A6460099B1AA /* ossl_typ.h */; };
+		33433CD31805BC040099B1AA /* pem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C871805A6460099B1AA /* pem.h */; };
+		33433CD41805BC040099B1AA /* pem2.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C881805A6460099B1AA /* pem2.h */; };
+		33433CD51805BC040099B1AA /* pkcs12.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C891805A6460099B1AA /* pkcs12.h */; };
+		33433CD61805BC040099B1AA /* pkcs7.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C8A1805A6460099B1AA /* pkcs7.h */; };
+		33433CD71805BC040099B1AA /* pqueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C8B1805A6460099B1AA /* pqueue.h */; };
+		33433CD81805BC040099B1AA /* rand.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C8C1805A6460099B1AA /* rand.h */; };
+		33433CD91805BC040099B1AA /* rc2.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C8D1805A6460099B1AA /* rc2.h */; };
+		33433CDA1805BC040099B1AA /* rc4.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C8E1805A6460099B1AA /* rc4.h */; };
+		33433CDB1805BC040099B1AA /* ripemd.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C8F1805A6460099B1AA /* ripemd.h */; };
+		33433CDC1805BC040099B1AA /* rsa.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C901805A6460099B1AA /* rsa.h */; };
+		33433CDD1805BC040099B1AA /* safestack.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C911805A6460099B1AA /* safestack.h */; };
+		33433CDE1805BC040099B1AA /* seed.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C921805A6460099B1AA /* seed.h */; };
+		33433CDF1805BC040099B1AA /* sha.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C931805A6460099B1AA /* sha.h */; };
+		33433CE01805BC040099B1AA /* srp.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C941805A6460099B1AA /* srp.h */; };
+		33433CE11805BC040099B1AA /* srtp.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C951805A6460099B1AA /* srtp.h */; };
+		33433CE21805BC040099B1AA /* ssl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C961805A6460099B1AA /* ssl.h */; };
+		33433CE31805BC040099B1AA /* ssl2.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C971805A6460099B1AA /* ssl2.h */; };
+		33433CE41805BC040099B1AA /* ssl23.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C981805A6460099B1AA /* ssl23.h */; };
+		33433CE51805BC040099B1AA /* ssl3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C991805A6460099B1AA /* ssl3.h */; };
+		33433CE61805BC040099B1AA /* stack.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C9A1805A6460099B1AA /* stack.h */; };
+		33433CE71805BC040099B1AA /* symhacks.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C9B1805A6460099B1AA /* symhacks.h */; };
+		33433CE81805BC040099B1AA /* tls1.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C9C1805A6460099B1AA /* tls1.h */; };
+		33433CE91805BC040099B1AA /* ts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C9D1805A6460099B1AA /* ts.h */; };
+		33433CEA1805BC040099B1AA /* txt_db.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C9E1805A6460099B1AA /* txt_db.h */; };
+		33433CEB1805BC040099B1AA /* ui.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C9F1805A6460099B1AA /* ui.h */; };
+		33433CEC1805BC040099B1AA /* ui_compat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA01805A6460099B1AA /* ui_compat.h */; };
+		33433CED1805BC040099B1AA /* whrlpool.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA11805A6460099B1AA /* whrlpool.h */; };
+		33433CEE1805BC040099B1AA /* x509.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA21805A6460099B1AA /* x509.h */; };
+		33433CEF1805BC040099B1AA /* x509_vfy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA31805A6460099B1AA /* x509_vfy.h */; };
+		33433CF01805BC040099B1AA /* x509v3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA41805A6460099B1AA /* x509v3.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +114,81 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				33433CA61805BC040099B1AA /* aes.h in CopyFiles */,
+				33433CA71805BC040099B1AA /* asn1.h in CopyFiles */,
+				33433CA81805BC040099B1AA /* asn1_mac.h in CopyFiles */,
+				33433CA91805BC040099B1AA /* asn1t.h in CopyFiles */,
+				33433CAA1805BC040099B1AA /* bio.h in CopyFiles */,
+				33433CAB1805BC040099B1AA /* blowfish.h in CopyFiles */,
+				33433CAC1805BC040099B1AA /* bn.h in CopyFiles */,
+				33433CAD1805BC040099B1AA /* buffer.h in CopyFiles */,
+				33433CAE1805BC040099B1AA /* camellia.h in CopyFiles */,
+				33433CAF1805BC040099B1AA /* cast.h in CopyFiles */,
+				33433CB01805BC040099B1AA /* cmac.h in CopyFiles */,
+				33433CB11805BC040099B1AA /* cms.h in CopyFiles */,
+				33433CB21805BC040099B1AA /* comp.h in CopyFiles */,
+				33433CB31805BC040099B1AA /* conf.h in CopyFiles */,
+				33433CB41805BC040099B1AA /* conf_api.h in CopyFiles */,
+				33433CB51805BC040099B1AA /* crypto.h in CopyFiles */,
+				33433CB61805BC040099B1AA /* des.h in CopyFiles */,
+				33433CB71805BC040099B1AA /* des_old.h in CopyFiles */,
+				33433CB81805BC040099B1AA /* dh.h in CopyFiles */,
+				33433CB91805BC040099B1AA /* dsa.h in CopyFiles */,
+				33433CBA1805BC040099B1AA /* dso.h in CopyFiles */,
+				33433CBB1805BC040099B1AA /* dtls1.h in CopyFiles */,
+				33433CBC1805BC040099B1AA /* e_os2.h in CopyFiles */,
+				33433CBD1805BC040099B1AA /* ebcdic.h in CopyFiles */,
+				33433CBE1805BC040099B1AA /* ec.h in CopyFiles */,
+				33433CBF1805BC040099B1AA /* ecdh.h in CopyFiles */,
+				33433CC01805BC040099B1AA /* ecdsa.h in CopyFiles */,
+				33433CC11805BC040099B1AA /* engine.h in CopyFiles */,
+				33433CC21805BC040099B1AA /* err.h in CopyFiles */,
+				33433CC31805BC040099B1AA /* evp.h in CopyFiles */,
+				33433CC41805BC040099B1AA /* hmac.h in CopyFiles */,
+				33433CC51805BC040099B1AA /* idea.h in CopyFiles */,
+				33433CC61805BC040099B1AA /* krb5_asn.h in CopyFiles */,
+				33433CC71805BC040099B1AA /* kssl.h in CopyFiles */,
+				33433CC81805BC040099B1AA /* lhash.h in CopyFiles */,
+				33433CC91805BC040099B1AA /* md4.h in CopyFiles */,
+				33433CCA1805BC040099B1AA /* md5.h in CopyFiles */,
+				33433CCB1805BC040099B1AA /* mdc2.h in CopyFiles */,
+				33433CCC1805BC040099B1AA /* modes.h in CopyFiles */,
+				33433CCD1805BC040099B1AA /* obj_mac.h in CopyFiles */,
+				33433CCE1805BC040099B1AA /* objects.h in CopyFiles */,
+				33433CCF1805BC040099B1AA /* ocsp.h in CopyFiles */,
+				33433CD01805BC040099B1AA /* opensslconf.h in CopyFiles */,
+				33433CD11805BC040099B1AA /* opensslv.h in CopyFiles */,
+				33433CD21805BC040099B1AA /* ossl_typ.h in CopyFiles */,
+				33433CD31805BC040099B1AA /* pem.h in CopyFiles */,
+				33433CD41805BC040099B1AA /* pem2.h in CopyFiles */,
+				33433CD51805BC040099B1AA /* pkcs12.h in CopyFiles */,
+				33433CD61805BC040099B1AA /* pkcs7.h in CopyFiles */,
+				33433CD71805BC040099B1AA /* pqueue.h in CopyFiles */,
+				33433CD81805BC040099B1AA /* rand.h in CopyFiles */,
+				33433CD91805BC040099B1AA /* rc2.h in CopyFiles */,
+				33433CDA1805BC040099B1AA /* rc4.h in CopyFiles */,
+				33433CDB1805BC040099B1AA /* ripemd.h in CopyFiles */,
+				33433CDC1805BC040099B1AA /* rsa.h in CopyFiles */,
+				33433CDD1805BC040099B1AA /* safestack.h in CopyFiles */,
+				33433CDE1805BC040099B1AA /* seed.h in CopyFiles */,
+				33433CDF1805BC040099B1AA /* sha.h in CopyFiles */,
+				33433CE01805BC040099B1AA /* srp.h in CopyFiles */,
+				33433CE11805BC040099B1AA /* srtp.h in CopyFiles */,
+				33433CE21805BC040099B1AA /* ssl.h in CopyFiles */,
+				33433CE31805BC040099B1AA /* ssl2.h in CopyFiles */,
+				33433CE41805BC040099B1AA /* ssl23.h in CopyFiles */,
+				33433CE51805BC040099B1AA /* ssl3.h in CopyFiles */,
+				33433CE61805BC040099B1AA /* stack.h in CopyFiles */,
+				33433CE71805BC040099B1AA /* symhacks.h in CopyFiles */,
+				33433CE81805BC040099B1AA /* tls1.h in CopyFiles */,
+				33433CE91805BC040099B1AA /* ts.h in CopyFiles */,
+				33433CEA1805BC040099B1AA /* txt_db.h in CopyFiles */,
+				33433CEB1805BC040099B1AA /* ui.h in CopyFiles */,
+				33433CEC1805BC040099B1AA /* ui_compat.h in CopyFiles */,
+				33433CED1805BC040099B1AA /* whrlpool.h in CopyFiles */,
+				33433CEE1805BC040099B1AA /* x509.h in CopyFiles */,
+				33433CEF1805BC040099B1AA /* x509_vfy.h in CopyFiles */,
+				33433CF01805BC040099B1AA /* x509v3.h in CopyFiles */,
 				330764A617FF028A00AE0A59 /* TBMultipartyProtocolManager.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,7 +631,7 @@
 		330764BE17FF028A00AE0A59 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -525,7 +675,7 @@
 		330764BF17FF028A00AE0A59 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
