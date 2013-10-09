@@ -12,5 +12,15 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.public_header_files = 'TBMultipartyProtocolManager/TBMultipartyProtocolManager.h'
+  #s.public_header_files = 'TBMultipartyProtocolManager/**/*.h'
+  #s.private_header_files = 'TBMultipartyProtocolManager/dependencies/include/**/*.h'
+  s.header_dir = 'openssl'
+  s.header_mappings_dir = 'TBMultipartyProtocolManager/dependencies/include'
+  
   s.source_files = "TBMultipartyProtocolManager/**/*.{h,m,c}"
+  #s.source_files = "TBMultipartyProtocolManager/**/*.{m,c}"
+  
+  s.vendored_library = 'TBMultipartyProtocolManager/dependencies/lib/*.a'
+  
+  #s.library	  = 'crypto', 'ssl'
 end

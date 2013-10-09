@@ -21,5 +21,6 @@
 
 - (NSString *)publicKeyMessageForUsername:(NSString *)username;
 - (BOOL)addPublicKeyFromMessage:(NSString *)publicKeyMessage forUsername:(NSString *)username;
++ (NSString *)md5FromString:(NSString *)string;
 
 @end

@@ -11,6 +11,9 @@
 #import "NSString+TBMultipartyProtocolManager.h"
 #import <CommonCrypto/CommonDigest.h>
 
+//#import "md5.h"
+#import <openssl/md5.h>
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,6 +178,22 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
   }
   
   return YES;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
++ (NSString *)md5FromString:(NSString *)string {
+  unsigned char *inStrg = (unsigned char *)[[string dataUsingEncoding:NSASCIIStringEncoding] bytes];
+  unsigned long lngth = [string length];
+  unsigned char result[MD5_DIGEST_LENGTH];
+  NSMutableString *outStrg = [NSMutableString string];
+  
+  MD5(inStrg, lngth, result);
+  
+  unsigned int i;
+  for (i = 0; i < MD5_DIGEST_LENGTH; i++) {
+    [outStrg appendFormat:@"%02x", result[i]];
+  }
+  return [outStrg copy];
 }
 
 @end
