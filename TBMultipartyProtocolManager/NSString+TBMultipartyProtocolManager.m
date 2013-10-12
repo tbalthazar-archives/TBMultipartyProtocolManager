@@ -36,5 +36,27 @@
   return dictionary;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
++ (NSString *)tb_stringFromBase64String:(NSString *)base64String {
+  NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:base64String
+                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+  return [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
++ (NSString *)hexadecimalStringWithData:(NSData *)data {
+  const unsigned char *dataBuffer = (const unsigned char *)[data bytes];
+  
+  if (!dataBuffer) return nil;
+  
+  NSUInteger dataLength = data.length;
+  NSMutableString *hexString  = [NSMutableString stringWithCapacity:(dataLength * 2)];
+  
+  for (int i = 0; i < dataLength; ++i) {
+    [hexString appendString:[NSString stringWithFormat:@"%02lx", (unsigned long)dataBuffer[i]]];
+  }
+  
+  return [NSString stringWithString:hexString];
+}
 
 @end

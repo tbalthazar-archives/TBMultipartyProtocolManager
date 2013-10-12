@@ -21,6 +21,26 @@
 
 - (NSString *)publicKeyMessageForUsername:(NSString *)username;
 - (BOOL)addPublicKeyFromMessage:(NSString *)publicKeyMessage forUsername:(NSString *)username;
-+ (NSString *)md5FromString:(NSString *)string;
+- (NSString *)encryptMessage:(NSString *)message forUsername:(NSString *)username;
+- (NSString *)decryptMessage:(NSString *)message fromUsername:(NSString *)username;
 
 @end
+
+
+/*
+#include <stdio.h>
+#define MAX_LINE 100
+
+int main(void)
+{
+  char line[MAX_LINE];
+  char *result;
+  
+  printf("Enter string:\n");
+  if ((result = gets(line)) != NULL)
+    printf("string is %s\n",result);
+  else
+    if (ferror(stdin))
+      printf("Error\n");
+}
+*/

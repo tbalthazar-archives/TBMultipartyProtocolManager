@@ -95,6 +95,7 @@
 		33433CEE1805BC040099B1AA /* x509.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA21805A6460099B1AA /* x509.h */; };
 		33433CEF1805BC040099B1AA /* x509_vfy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA31805A6460099B1AA /* x509_vfy.h */; };
 		33433CF01805BC040099B1AA /* x509v3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA41805A6460099B1AA /* x509v3.h */; };
+		33433DCC1807F3DB0099B1AA /* TBMultipartyChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 33433DCB1807F3DB0099B1AA /* TBMultipartyChatMessage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,6 +289,8 @@
 		33433CA21805A6460099B1AA /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
 		33433CA31805A6460099B1AA /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
 		33433CA41805A6460099B1AA /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
+		33433DCA1807F3DB0099B1AA /* TBMultipartyChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBMultipartyChatMessage.h; sourceTree = "<group>"; };
+		33433DCB1807F3DB0099B1AA /* TBMultipartyChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMultipartyChatMessage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +350,7 @@
 		330764A217FF028A00AE0A59 /* TBMultipartyProtocolManager */ = {
 			isa = PBXGroup;
 			children = (
+				33433DC61807F33A0099B1AA /* models */,
 				333D71431802B34100E245A4 /* categories */,
 				330764C617FF042D00AE0A59 /* dependencies */,
 				330764A517FF028A00AE0A59 /* TBMultipartyProtocolManager.h */,
@@ -511,6 +515,15 @@
 			path = dependencies/include/openssl;
 			sourceTree = "<group>";
 		};
+		33433DC61807F33A0099B1AA /* models */ = {
+			isa = PBXGroup;
+			children = (
+				33433DCA1807F3DB0099B1AA /* TBMultipartyChatMessage.h */,
+				33433DCB1807F3DB0099B1AA /* TBMultipartyChatMessage.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -594,6 +607,7 @@
 			files = (
 				330764A817FF028A00AE0A59 /* TBMultipartyProtocolManager.m in Sources */,
 				333D71461802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m in Sources */,
+				33433DCC1807F3DB0099B1AA /* TBMultipartyChatMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
