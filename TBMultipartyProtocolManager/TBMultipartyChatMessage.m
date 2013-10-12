@@ -49,8 +49,9 @@
     for (NSString *username in _usernames) {
       NSString *message = [[[JSONDic objectForKey:@"text"]
                             objectForKey:username] objectForKey:@"message"];
-      //message = [NSString tb_stringFromBase64String:message];
-      [messageForUsernames setObject:message forKey:username];
+      NSData *messageData = [[NSData alloc] initWithBase64EncodedString:message
+                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+      [messageForUsernames setObject:messageData forKey:username];
     }
     _messageForUsernames = messageForUsernames;
     
@@ -58,8 +59,9 @@
     NSMutableDictionary *ivForUsernames = [NSMutableDictionary dictionaryWithCapacity:nbUsernames];
     for (NSString *username in _usernames) {
       NSString *iv = [[[JSONDic objectForKey:@"text"] objectForKey:username] objectForKey:@"iv"];
-      //iv = [NSString tb_stringFromBase64String:iv];
-      [ivForUsernames setObject:iv forKey:username];
+      NSData *ivData = [[NSData alloc] initWithBase64EncodedString:iv
+                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+      [ivForUsernames setObject:ivData forKey:username];
     }
     _ivForUsernames = ivForUsernames;
     
@@ -69,8 +71,9 @@
     for (NSString *username in _usernames) {
       NSString *hmac = [[[JSONDic objectForKey:@"text"]
                          objectForKey:username] objectForKey:@"hmac"];
-      //hmac = [NSString tb_stringFromBase64String:hmac];
-      [hmacForUsernames setObject:hmac forKey:username];
+      NSData *hmacData = [[NSData alloc] initWithBase64EncodedString:hmac
+                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+      [hmacForUsernames setObject:hmacData forKey:username];
     }
     _hmacForUsernames = hmacForUsernames;
     

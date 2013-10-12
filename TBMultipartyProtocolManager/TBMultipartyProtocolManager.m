@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSMutableDictionary *sharedSecrets;
 @property (nonatomic, strong) NSMutableDictionary *fingerprints;
 
-- (NSString *)generateSharedSecretForUsername:(NSString *)username;
+- (NSData *)generateSharedSecretForUsername:(NSString *)username;
 - (NSString *)generateFingerprintForUsername:(NSString *)username;
 
 @end
@@ -89,9 +89,14 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
 #pragma mark Private Methods
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSString *)generateSharedSecretForUsername:(NSString *)username {
+- (NSData *)generateSharedSecretForUsername:(NSString *)username {
+  // sharedSecretAB = SHA-512(scalarMult(privateKeyA, publicKeyB))
+  
   // keys are stored base64 encoded
-  NSData *decodedPublicKey = [[NSData alloc] initWithBase64EncodedString:self.publicKey
+//  NSData *decodedPublicKey = [[NSData alloc] initWithBase64EncodedString:self.publicKey
+//                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+  NSString *publicKey = [self.publicKeys objectForKey:username];
+  NSData *decodedPublicKey = [[NSData alloc] initWithBase64EncodedString:publicKey
                                               options:NSDataBase64DecodingIgnoreUnknownCharacters];
   NSData *decodedPrivateKey = [[NSData alloc] initWithBase64EncodedString:self.privateKey
                                               options:NSDataBase64DecodingIgnoreUnknownCharacters];
@@ -113,10 +118,11 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
   CC_SHA512(sharedSecretData.bytes, sharedSecretData.length, digest);
   sharedSecretData = [NSData dataWithBytes:digest length:CC_SHA512_DIGEST_LENGTH];
   NSLog(@"-- sharedSecretData %@ | %d bytes", sharedSecretData, sharedSecretData.length);
-  
+
+  return sharedSecretData;
   //return [sharedSecretData base64EncodedString];
-  return [sharedSecretData
-          base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//  return [sharedSecretData
+//          base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -171,25 +177,27 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
   // get public key
   NSString *publicKey = [[[JSONDic objectForKey:@"text"]
                          objectForKey:myName] objectForKey:@"message"];
+  //publicKey = [NSString tb_stringFromBase64String:publicKey];
   
   if ([self.publicKeys objectForKey:username]==nil) {
+    
     [self.publicKeys setObject:publicKey forKey:username];
     [self.sharedSecrets setObject:[self generateSharedSecretForUsername:username] forKey:username];
     [self.fingerprints setObject:[self generateFingerprintForUsername:username] forKey:username];
 
     // -- start debug
-    NSString *sharedSecret = [self.sharedSecrets objectForKey:username];
-    //NSData *sharedSecretData = [sharedSecret dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableData *sharedSecretData = [[NSMutableData alloc]
-                                       initWithBase64EncodedString:sharedSecret
-                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    NSLog(@"-- sharedSecretData length : %d", sharedSecretData.length);
-    [sharedSecretData setLength:32];
-    NSLog(@"-- sharedSecretData length : %d", sharedSecretData.length);
-    
-    NSLog(@"-- sharedSecretData for %@ :%@", username, sharedSecretData);
-    NSLog(@"-- sharedSecretString for %@ : %@",
-          username, [[NSString alloc] initWithData:sharedSecretData encoding:NSUTF8StringEncoding]);
+//    NSString *sharedSecret = [self.sharedSecrets objectForKey:username];
+//    //NSData *sharedSecretData = [sharedSecret dataUsingEncoding:NSUTF8StringEncoding];
+//    NSMutableData *sharedSecretData = [[NSMutableData alloc]
+//                                       initWithBase64EncodedString:sharedSecret
+//                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+//    NSLog(@"-- sharedSecretData length : %d", sharedSecretData.length);
+//    [sharedSecretData setLength:32];
+//    NSLog(@"-- sharedSecretData length : %d", sharedSecretData.length);
+//    
+//    NSLog(@"-- sharedSecretData for %@ :%@", username, sharedSecretData);
+//    NSLog(@"-- sharedSecretString for %@ : %@",
+//          username, [[NSString alloc] initWithData:sharedSecretData encoding:NSUTF8StringEncoding]);
    // -- end debug
   }
   
@@ -306,19 +314,13 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
   
   TBMultipartyChatMessage *chatMessage = [[TBMultipartyChatMessage alloc]
                                           initWithJSONMessage:message];
-  NSString *msgToDecrypt = [chatMessage.messageForUsernames objectForKey:self.myName];
-  NSString *ivOjbect = [chatMessage.ivForUsernames objectForKey:self.myName];
-  NSString *hmac = [chatMessage.hmacForUsernames objectForKey:self.myName];
+  NSData *cyphertextData = [chatMessage.messageForUsernames objectForKey:self.myName];
+  NSData *ivData = [chatMessage.ivForUsernames objectForKey:self.myName];
+  NSData *hmacData = [chatMessage.hmacForUsernames objectForKey:self.myName];
   NSString *tag = chatMessage.tag;
   
-  NSString *sharedSecret = [self.sharedSecrets objectForKey:username];
-  //NSData *sharedSecretData = [sharedSecret dataUsingEncoding:NSUTF8StringEncoding];
-  NSData *sharedSecretData = [[NSData alloc] initWithBase64EncodedString:sharedSecret
-                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+  NSData *sharedSecretData = [self.sharedSecrets objectForKey:username];
   NSLog(@"-- sharedSecretData.length : %d", sharedSecretData.length);
-  
-//  const unsigned char* enc_key = (const unsigned char *)[sharedSecret
-//                                                         cStringUsingEncoding:NSUTF8StringEncoding];
   unsigned char enc_key[32];
   [sharedSecretData getBytes:enc_key range:NSMakeRange(0, 32)];
   
@@ -329,11 +331,7 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
   struct ctr_state state;
   
   // IV
-  NSData *ivData = [ivOjbect dataUsingEncoding:NSUTF8StringEncoding];
-//  NSData *ivData = [[NSData alloc] initWithBase64EncodedString:ivOjbect
-//                                              options:0];
   NSLog(@"-- ivData length : %d", ivData.length);
-  //unsigned char* iv = (unsigned char *)[ivOjbect cStringUsingEncoding:NSUTF8StringEncoding];
   [ivData getBytes:iv range:NSMakeRange(0, 12)];
   
   // Initializing the encryption KEY
@@ -345,34 +343,32 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
   init_ctr(&state, iv); // Counter call
 
   // Decrypt the data in AES_BLOCK_SIZE bytes blocks
-  NSData *encryptedData = [msgToDecrypt dataUsingEncoding:NSUTF8StringEncoding];
-//  NSData *encryptedData = [[NSData alloc] initWithBase64EncodedString:msgToDecrypt
-//                                              options:0];
-  NSUInteger encryptedDataLength = encryptedData.length;
+  NSUInteger cyphertextDataLength = cyphertextData.length;
   NSUInteger byteRangeStart = 0;
   NSUInteger byteRangeLength = AES_BLOCK_SIZE;
   NSUInteger byteRangeMax = byteRangeStart + byteRangeLength;
   
-  if (byteRangeMax > encryptedDataLength) {
-    byteRangeLength = encryptedDataLength - byteRangeStart;
+  if (byteRangeMax > cyphertextDataLength) {
+    byteRangeLength = cyphertextDataLength - byteRangeStart;
   }
   
   NSRange bytesRange = NSMakeRange(byteRangeStart, byteRangeLength);
   
-  NSLog(@"-- will read %d bytes : %@", encryptedDataLength, encryptedData);
+  NSLog(@"-- will read %d bytes : %@", cyphertextDataLength, cyphertextData);
   
   NSMutableData *readData = [NSMutableData data]; // not needed, only for debug
   NSMutableData *decryptedData = [NSMutableData data];
-  while (byteRangeStart < encryptedDataLength) {
-    [encryptedData getBytes:indata range:bytesRange];
-    AES_ctr128_encrypt(indata, outdata, byteRangeLength, &key, state.ivec, state.ecount, &state.num);
+  while (byteRangeStart < cyphertextDataLength) {
+    [cyphertextData getBytes:indata range:bytesRange];
+    AES_ctr128_encrypt(indata, outdata, byteRangeLength,
+                       &key, state.ivec, state.ecount, &state.num);
     [readData appendBytes:indata length:byteRangeLength];
     [decryptedData appendBytes:outdata length:byteRangeLength];
     
     byteRangeStart+=byteRangeLength;
     byteRangeMax = byteRangeStart + byteRangeLength;
-    if (byteRangeMax > encryptedDataLength) {
-      byteRangeLength = encryptedDataLength - byteRangeStart;
+    if (byteRangeMax > cyphertextDataLength) {
+      byteRangeLength = cyphertextDataLength - byteRangeStart;
     }
     bytesRange = NSMakeRange(byteRangeStart, byteRangeLength);
   }
@@ -386,10 +382,14 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
   NSLog(@"-- length before : %d", decryptedDataLength);
   [decryptedData setLength:decryptedDataLength-64];
   NSLog(@"-- length after : %d", decryptedData.length);
+  
+  NSLog(@"-- decrypted string : %@",
+        [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding]);
+  NSLog(@"-- decrypted string : %@", [decryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]);
 
   //NSString *decryptedString = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
-  NSString *decryptedString = [decryptedData base64EncodedStringWithOptions:
-                               NSDataBase64Encoding64CharacterLineLength];
+//  NSString *decryptedString = [decryptedData base64EncodedStringWithOptions:
+//                               NSDataBase64Encoding64CharacterLineLength];
 
   
   

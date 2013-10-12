@@ -16,6 +16,5 @@
 + (NSString *)tb_stringFromJSONObject:(id)JSONObject;
 + (NSDictionary *)tb_JSONStringToDictionary:(NSString *)JSONString;
 + (NSString *)tb_stringFromBase64String:(NSString *)base64String;
-+ (NSString *)hexadecimalStringWithData:(NSData *)data;
 
 @end
