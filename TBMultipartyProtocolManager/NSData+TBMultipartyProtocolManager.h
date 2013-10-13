@@ -1,8 +1,8 @@
 //
-//  NSString+TBMultipartyProtocolManager.h
+//  NSData+TBMultipartyProtocolManager.h
 //  TBMultipartyProtocolManager
 //
-//  Created by Thomas Balthazar on 07/10/13.
+//  Created by Thomas Balthazar on 13/10/13.
 //  Copyright (c) 2013 Thomas Balthazar. All rights reserved.
 //
 
@@ -11,14 +11,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface NSString (TBMultipartyProtocolManager)
+@interface NSData (TBMultipartyProtocolManager)
 
-// JSON
-+ (NSString *)tb_stringFromJSONObject:(id)JSONObject;
-+ (NSDictionary *)tb_JSONStringToDictionary:(NSString *)JSONString;
-
-// base64
-- (NSString *)tb_stringFromBase64String;
 - (NSString *)tb_base64String;
++ (NSData *)tb_dataFromBase64String:(NSString *)base64String;
 
 @end
