@@ -34,13 +34,17 @@
 @implementation TBMultipartyChatMessage
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-- (id)initWithJSONMessage:(NSString *)JSONMessage {
+- (id)initWithJSONMessage:(NSString *)JSONMessage senderName:(NSString *)senderName {
   //  All the binary data (ciphertexts, IVs and HMACs) is encoded as Base64 when sending
   if (self=[super init]) {
+    _senderName = senderName;
+    
     NSDictionary *JSONDic = [NSString tb_JSONStringToDictionary:JSONMessage];
     
     // usernames
-    _usernames = [[JSONDic objectForKey:@"text"] allKeys];
+    NSArray *unsortedUsernames = [[JSONDic objectForKey:@"text"] allKeys];
+    _usernames = [unsortedUsernames
+                  sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
     NSUInteger nbUsernames = [_usernames count];
     
     // messages
