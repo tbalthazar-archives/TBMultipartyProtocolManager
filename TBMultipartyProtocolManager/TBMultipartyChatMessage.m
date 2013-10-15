@@ -82,7 +82,8 @@
     _hmacForUsernames = hmacForUsernames;
     
     // tag
-    _tag = [JSONDic objectForKey:@"tag"];
+    _tag = [[NSData alloc] initWithBase64EncodedString:[JSONDic objectForKey:@"tag"]
+                                               options:NSDataBase64DecodingIgnoreUnknownCharacters];
   }
   
   return self;

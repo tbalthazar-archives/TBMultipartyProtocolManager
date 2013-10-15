@@ -15,6 +15,7 @@
 #import "curve25519-donna.h"
 #import "aes.h"
 #import "hmac.h"
+#import "sha.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,6 +26,7 @@
 @property (nonatomic, strong, readwrite) NSString *privateKey;
 @property (nonatomic, strong, readwrite) NSString *publicKey;
 @property (nonatomic, strong) NSMutableDictionary *publicKeys;
+@property (nonatomic, strong) NSMutableArray *usedIVs;
 
 // shared secrets are stored as (non base64) NSData
 @property (nonatomic, strong) NSMutableDictionary *sharedSecrets;
@@ -33,6 +35,9 @@
 - (NSData *)generateSharedSecretForUsername:(NSString *)username;
 - (NSString *)generateFingerprintForUsername:(NSString *)username;
 - (BOOL)checkHMACForChatMessage:(TBMultipartyChatMessage *)chatMessage;
+- (BOOL)checkIVFirstUseForChatMessage:(TBMultipartyChatMessage *)chatMessage;
+- (BOOL)checkTagForChatMessage:(TBMultipartyChatMessage *)chatMessage
+                 decryptedData:(NSData *)decryptedData;
 
 @end
 
@@ -82,6 +87,7 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
     _sharedSecrets = [NSMutableDictionary dictionary];
     _fingerprints = [NSMutableDictionary dictionary];
     _myName = nil;
+    _usedIVs = [NSMutableArray array];
   }
   
   return self;
@@ -172,6 +178,29 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL)checkIVFirstUseForChatMessage:(TBMultipartyChatMessage *)chatMessage {
+  NSData *iv = [chatMessage.ivForUsernames objectForKey:self.myName];
+  return ![self.usedIVs containsObject:iv];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL)checkTagForChatMessage:(TBMultipartyChatMessage *)chatMessage
+                 decryptedData:(NSData *)decryptedData {
+  NSMutableData *computedTag = [NSMutableData dataWithData:decryptedData];
+  for (NSString *username in chatMessage.usernames) {
+    [computedTag appendData:[chatMessage.hmacForUsernames objectForKey:username]];
+  }
+  
+  unsigned char digest[SHA512_DIGEST_LENGTH];
+  for (NSInteger i=0; i<8; i++) {
+    SHA512(computedTag.bytes, computedTag.length, digest);
+    computedTag = [NSMutableData dataWithBytes:digest length:sizeof(digest)];
+  }
+  
+  return [computedTag isEqualToData:chatMessage.tag];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark Public Methods
@@ -241,40 +270,33 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSString *)decryptMessage:(NSString *)message fromUsername:(NSString *)username {
-  //Check HMAC
-  //Check IV reuse
-  //Decrypt
-  //Check tag
-  //Remove padding
-  //Convert to UTF8
-  
-  
   TBMultipartyChatMessage *chatMessage = [[TBMultipartyChatMessage alloc]
                                           initWithJSONMessage:message senderName:username];
   
+  // check HMAC
   if (![self checkHMACForChatMessage:chatMessage]) return nil;
   
-  NSData *cyphertextData = [chatMessage.messageForUsernames objectForKey:self.myName];
-  NSData *ivData = [chatMessage.ivForUsernames objectForKey:self.myName];
-  NSData *hmacData = [chatMessage.hmacForUsernames objectForKey:self.myName];
-  NSString *tag = chatMessage.tag;
+  // check IV reuse
+  if (![self checkIVFirstUseForChatMessage:chatMessage]) return nil;
+  [self.usedIVs addObject:[chatMessage.ivForUsernames objectForKey:self.myName]];
   
+  // get shared secret
   NSData *sharedSecretData = [self.sharedSecrets objectForKey:username];
-  NSLog(@"-- sharedSecretData.length : %d", sharedSecretData.length);
   unsigned char enc_key[32];
   [sharedSecretData getBytes:enc_key range:NSMakeRange(0, 32)];
   
+  // aes vars
   AES_KEY key;
   unsigned char indata[AES_BLOCK_SIZE];
   unsigned char outdata[AES_BLOCK_SIZE];
   unsigned char iv[12];
   struct ctr_state state;
   
-  // IV
-  NSLog(@"-- ivData length : %d", ivData.length);
+  // get IV
+  NSData *ivData = [chatMessage.ivForUsernames objectForKey:self.myName];
   [ivData getBytes:iv range:NSMakeRange(0, 12)];
   
-  // Initializing the encryption KEY
+  // initializing the encryption KEY
   if (AES_set_encrypt_key(enc_key, 256, &key) < 0) {
     NSLog(@"-- error initializing private key");
   }
@@ -283,28 +305,32 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
   init_ctr(&state, iv); // Counter call
 
   // Decrypt the data in AES_BLOCK_SIZE bytes blocks
+  NSData *cyphertextData = [chatMessage.messageForUsernames objectForKey:self.myName];
+  NSMutableData *decryptedData = [NSMutableData data];
   NSUInteger cyphertextDataLength = cyphertextData.length;
   NSUInteger byteRangeStart = 0;
   NSUInteger byteRangeLength = AES_BLOCK_SIZE;
   NSUInteger byteRangeMax = byteRangeStart + byteRangeLength;
   
+  // text to decrypt will be read in AES_BLOCK_SIZE chunks, make sure not to read more
+  // than the actual size of the text
   if (byteRangeMax > cyphertextDataLength) {
     byteRangeLength = cyphertextDataLength - byteRangeStart;
   }
-  
   NSRange bytesRange = NSMakeRange(byteRangeStart, byteRangeLength);
   
-  NSLog(@"-- will read %d bytes : %@", cyphertextDataLength, cyphertextData);
-  
-  NSMutableData *readData = [NSMutableData data]; // not needed, only for debug
-  NSMutableData *decryptedData = [NSMutableData data];
   while (byteRangeStart < cyphertextDataLength) {
+    // get some bytes to decrypt in the indata char array
     [cyphertextData getBytes:indata range:bytesRange];
+    
+    // decrypt those bytes
     AES_ctr128_encrypt(indata, outdata, byteRangeLength,
                        &key, state.ivec, state.ecount, &state.num);
-    [readData appendBytes:indata length:byteRangeLength];
+    
+    // store those decrypted bytes in the nsdata var
     [decryptedData appendBytes:outdata length:byteRangeLength];
     
+    // compute the next range of byte to decrypt
     byteRangeStart+=byteRangeLength;
     byteRangeMax = byteRangeStart + byteRangeLength;
     if (byteRangeMax > cyphertextDataLength) {
@@ -313,21 +339,14 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
     bytesRange = NSMakeRange(byteRangeStart, byteRangeLength);
   }
   
-  NSLog(@"-- has read %d bytes : %@", readData.length, readData);
-  
-  NSLog(@"-- decrypted data has %d bytes : %@", decryptedData.length, decryptedData);
+  // check tag
+  if (![self checkTagForChatMessage:chatMessage decryptedData:decryptedData]) return nil;
   
   // remove padding
   NSUInteger decryptedDataLength = decryptedData.length;
-  NSLog(@"-- length before : %d", decryptedDataLength);
   [decryptedData setLength:decryptedDataLength-64];
-  NSLog(@"-- length after : %d", decryptedData.length);
   
-  NSLog(@"-- decrypted string : %@",
-        [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding]);
-  NSLog(@"-- decrypted string : %@", [decryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]);
-  
-  return nil;
+  return [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
 }
 
 

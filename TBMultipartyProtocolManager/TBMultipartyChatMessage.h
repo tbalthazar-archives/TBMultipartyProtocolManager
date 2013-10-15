@@ -18,7 +18,7 @@
 @property (nonatomic, readonly) NSDictionary *messageForUsernames;
 @property (nonatomic, readonly) NSDictionary *ivForUsernames;
 @property (nonatomic, readonly) NSDictionary *hmacForUsernames;
-@property (nonatomic, readonly) NSString *tag;
+@property (nonatomic, readonly) NSData *tag;
 
 - (id)initWithJSONMessage:(NSString *)JSONMessage senderName:(NSString *)senderName;
 
