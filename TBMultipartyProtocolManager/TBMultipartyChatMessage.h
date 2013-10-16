@@ -13,13 +13,14 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TBMultipartyChatMessage : NSObject
 
-@property (nonatomic, readonly) NSString *senderName;
-@property (nonatomic, readonly) NSArray *usernames;
-@property (nonatomic, readonly) NSDictionary *messageForUsernames;
-@property (nonatomic, readonly) NSDictionary *ivForUsernames;
-@property (nonatomic, readonly) NSDictionary *hmacForUsernames;
-@property (nonatomic, readonly) NSData *tag;
+@property (nonatomic, strong) NSString *senderName;
+@property (nonatomic, strong) NSArray *usernames;
+@property (nonatomic, strong) NSDictionary *messageForUsernames;
+@property (nonatomic, strong) NSDictionary *ivForUsernames;
+@property (nonatomic, strong) NSDictionary *hmacForUsernames;
+@property (nonatomic, strong) NSData *tag;
 
 - (id)initWithJSONMessage:(NSString *)JSONMessage senderName:(NSString *)senderName;
+- (NSString *)toJSONString;
 
 @end

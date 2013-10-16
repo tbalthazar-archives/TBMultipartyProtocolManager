@@ -8,6 +8,7 @@
 
 #import "TBMultipartyChatMessage.h"
 #import "NSString+TBMultipartyProtocolManager.h"
+#import "NSData+TBMultipartyProtocolManager.h"
 
 /*
 {
@@ -87,6 +88,27 @@
   }
   
   return self;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSString *)toJSONString {
+  NSMutableDictionary *usersDic = [NSMutableDictionary
+                                   dictionaryWithCapacity:[self.usernames count]];
+  for (NSString *username in self.usernames) {
+    NSString *message = [[self.messageForUsernames objectForKey:username] tb_base64String];
+    NSString *iv = [[self.ivForUsernames objectForKey:username] tb_base64String];
+    NSString *hmac = [[self.hmacForUsernames objectForKey:username] tb_base64String];
+    
+    [usersDic setObject:@{@"message": message, @"iv": iv, @"hmac": hmac}
+                 forKey:username];
+  }
+  
+  NSString *tag = [self.tag tb_base64String];
+  NSDictionary *messageDic =  @{  @"text": usersDic,
+                                  @"type": @"message",
+                                  @"tag": tag};
+  
+  return [NSString tb_stringFromJSONObject:messageDic];
 }
 
 @end
