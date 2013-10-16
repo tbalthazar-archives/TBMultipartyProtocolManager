@@ -17,8 +17,4 @@
 + (NSString *)tb_stringFromJSONObject:(id)JSONObject;
 + (NSDictionary *)tb_JSONStringToDictionary:(NSString *)JSONString;
 
-// base64
-- (NSString *)tb_stringFromBase64String;
-- (NSString *)tb_base64String;
-
 @end

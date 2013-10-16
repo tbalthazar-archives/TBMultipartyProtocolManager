@@ -41,22 +41,4 @@
   return dictionary;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark -
-#pragma mark base64
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSString *)tb_stringFromBase64String {
-  NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:self
-                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
-  return [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSString *)tb_base64String {
-  NSData *decodedData = [self dataUsingEncoding:NSUTF8StringEncoding];
-  return [decodedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-}
-
 @end
