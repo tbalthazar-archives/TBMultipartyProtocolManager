@@ -17,8 +17,6 @@
 		330764BB17FF028A00AE0A59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 330764B917FF028A00AE0A59 /* InfoPlist.strings */; };
 		330764BD17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */; };
 		333D71461802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D71451802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m */; };
-		33433C541805A6220099B1AA /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33433C521805A6220099B1AA /* libcrypto.a */; };
-		33433C551805A6220099B1AA /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33433C531805A6220099B1AA /* libssl.a */; };
 		33433CA51805A6460099B1AA /* curve25519-donna.c in Sources */ = {isa = PBXBuildFile; fileRef = 33433C571805A6460099B1AA /* curve25519-donna.c */; };
 		33433CA61805BC040099B1AA /* aes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C5A1805A6460099B1AA /* aes.h */; };
 		33433CA71805BC040099B1AA /* asn1.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433C5B1805A6460099B1AA /* asn1.h */; };
@@ -97,6 +95,8 @@
 		33433CF01805BC040099B1AA /* x509v3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 33433CA41805A6460099B1AA /* x509v3.h */; };
 		33433DCC1807F3DB0099B1AA /* TBMultipartyChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 33433DCB1807F3DB0099B1AA /* TBMultipartyChatMessage.m */; };
 		337BC9C4180B06130037EB9A /* NSData+TBMultipartyProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 337BC9C3180B06130037EB9A /* NSData+TBMultipartyProtocolManager.m */; };
+		33C3651F1811395C003EAF93 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C3651D1811395C003EAF93 /* libcrypto.a */; };
+		33C365201811395C003EAF93 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C3651E1811395C003EAF93 /* libssl.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,8 +211,6 @@
 		330764BC17FF028A00AE0A59 /* TBMultipartyProtocolManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBMultipartyProtocolManagerTests.m; sourceTree = "<group>"; };
 		333D71441802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TBMultipartyProtocolManager.h"; sourceTree = "<group>"; };
 		333D71451802B35E00E245A4 /* NSString+TBMultipartyProtocolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TBMultipartyProtocolManager.m"; sourceTree = "<group>"; };
-		33433C521805A6220099B1AA /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = dependencies/lib/libcrypto.a; sourceTree = "<group>"; };
-		33433C531805A6220099B1AA /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = dependencies/lib/libssl.a; sourceTree = "<group>"; };
 		33433C571805A6460099B1AA /* curve25519-donna.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "curve25519-donna.c"; sourceTree = "<group>"; };
 		33433C581805A6460099B1AA /* curve25519-donna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "curve25519-donna.h"; sourceTree = "<group>"; };
 		33433C5A1805A6460099B1AA /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -294,6 +292,8 @@
 		33433DCB1807F3DB0099B1AA /* TBMultipartyChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBMultipartyChatMessage.m; sourceTree = "<group>"; };
 		337BC9C2180B06130037EB9A /* NSData+TBMultipartyProtocolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+TBMultipartyProtocolManager.h"; sourceTree = "<group>"; };
 		337BC9C3180B06130037EB9A /* NSData+TBMultipartyProtocolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+TBMultipartyProtocolManager.m"; sourceTree = "<group>"; };
+		33C3651D1811395C003EAF93 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = dependencies/lib/libcrypto.a; sourceTree = "<group>"; };
+		33C3651E1811395C003EAF93 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = dependencies/lib/libssl.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,9 +301,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33433C541805A6220099B1AA /* libcrypto.a in Frameworks */,
+				33C3651F1811395C003EAF93 /* libcrypto.a in Frameworks */,
 				330764A117FF028A00AE0A59 /* Foundation.framework in Frameworks */,
-				33433C551805A6220099B1AA /* libssl.a in Frameworks */,
+				33C365201811395C003EAF93 /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,8 +421,8 @@
 		33433C511805A6160099B1AA /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				33433C521805A6220099B1AA /* libcrypto.a */,
-				33433C531805A6220099B1AA /* libssl.a */,
+				33C3651D1811395C003EAF93 /* libcrypto.a */,
+				33C3651E1811395C003EAF93 /* libssl.a */,
 			);
 			name = lib;
 			sourceTree = "<group>";
