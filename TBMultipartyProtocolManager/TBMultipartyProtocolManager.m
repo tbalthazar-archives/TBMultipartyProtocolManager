@@ -26,6 +26,7 @@
 // keys are stored as base64 encoded strings
 @property (nonatomic, strong, readwrite) NSString *privateKey;
 @property (nonatomic, strong, readwrite) NSString *publicKey;
+@property (nonatomic, strong, readwrite) NSString *fingerprint;
 @property (nonatomic, strong) NSMutableDictionary *publicKeys;
 @property (nonatomic, strong) NSMutableArray *usedIVs;
 
@@ -105,6 +106,7 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
     
     _privateKey = [privateKeyData tb_base64String];
     _publicKey = [publicKeyData tb_base64String];
+    _fingerprint = nil;
     
     _publicKeys = [NSMutableDictionary dictionary];
     _sharedSecrets = [NSMutableDictionary dictionary];
@@ -145,18 +147,38 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSString *)generateFingerprintForUsername:(NSString *)username {
-  NSData *publicKeyData = [[NSData alloc] initWithBase64EncodedString:self.publicKey
-                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+  // fingerprintN = SHA-512(publicKeyN).substring(0, 40) in HEX
+  
+  NSString *publicKey = nil;
+  if ([username isEqualToString:self.myName]) {
+    publicKey = self.publicKey;
+  }
+  else {
+    publicKey = [self.publicKeys objectForKey:username];
+  }
+  
+  NSData *publicKeyData = [NSData tb_dataFromBase64String:publicKey];
 
   uint8_t digest[CC_SHA512_DIGEST_LENGTH] = {0};
   CC_SHA512(publicKeyData.bytes, publicKeyData.length, digest);
   publicKeyData = [NSData dataWithBytes:digest length:CC_SHA512_DIGEST_LENGTH];
   NSLog(@"-- publicKeyData %@ | %d bytes", publicKeyData, publicKeyData.length);
   
-  NSString *fingerprint = [publicKeyData
-                          base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  // convert to hex string
+  NSMutableString *hexValue = [NSMutableString string];
+  for (int i=0; i < CC_SHA512_DIGEST_LENGTH; i++) {
+    [hexValue appendString:[NSString stringWithFormat:@"%02X", digest[i]]];
+  }
   
-  return [fingerprint substringWithRange:NSMakeRange(0, 40)];
+  hexValue = [NSMutableString stringWithString:[hexValue substringWithRange:NSMakeRange(0, 40)]];
+  
+  for (NSUInteger i=39; i > 0; i--) {
+    if (i%8==0) {
+      [hexValue insertString:@" " atIndex:i];
+    }
+  }
+  
+  return hexValue;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -317,6 +339,15 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark Public Methods
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSString *)fingerprint {
+  if (_fingerprint==nil) {
+    _fingerprint = [self generateFingerprintForUsername:self.myName];
+  }
+  
+  return _fingerprint;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSString *)publicKeyMessageForUsername:(NSString *)username {

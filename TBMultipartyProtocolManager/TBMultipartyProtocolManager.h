@@ -15,6 +15,7 @@
 
 @property (nonatomic, readonly) NSString *privateKey;
 @property (nonatomic, readonly) NSString *publicKey;
+@property (nonatomic, readonly) NSString *fingerprint;
 @property (nonatomic, strong) NSString *myName;
 
 + (TBMultipartyProtocolManager *)sharedMultipartyProtocolManager;
