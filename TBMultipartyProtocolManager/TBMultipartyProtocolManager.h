@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol TBMultipartyProtocolManagerDelegate;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TBMultipartyProtocolManager : NSObject
 
+@property (nonatomic, weak) id <TBMultipartyProtocolManagerDelegate> delegate;
 @property (nonatomic, readonly) NSString *privateKey;
 @property (nonatomic, readonly) NSString *publicKey;
 @property (nonatomic, readonly) NSString *fingerprint;
@@ -24,5 +27,16 @@
 - (BOOL)addPublicKeyFromMessage:(NSString *)publicKeyMessage forUsername:(NSString *)username;
 - (NSString *)encryptMessage:(NSString *)message forUsernames:(NSArray *)usernames;
 - (NSString *)decryptMessage:(NSString *)message fromUsername:(NSString *)username;
+- (NSString *)fingerprintForUsername:(NSString *)username;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+@protocol TBMultipartyProtocolManagerDelegate <NSObject>
+
+- (void)multipartyProtocolManager:(TBMultipartyProtocolManager *)manager
+didEstablishSecureConnectionWithUsername:(NSString *)username;
 
 @end

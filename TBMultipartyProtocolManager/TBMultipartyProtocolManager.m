@@ -387,6 +387,12 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
     [self.fingerprints setObject:[self generateFingerprintForUsername:username] forKey:username];
   }
   
+  if ([self.delegate respondsToSelector:
+       @selector(multipartyProtocolManager:didEstablishSecureConnectionWithUsername:)]) {
+    [self.delegate multipartyProtocolManager:self
+    didEstablishSecureConnectionWithUsername:username];
+  }
+  
   return YES;
 }
 
@@ -471,6 +477,11 @@ static TBMultipartyProtocolManager *sharedMultipartyProtocolManager = nil;
   [decryptedData setLength:decryptedDataLength-64];
   
   return [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSString *)fingerprintForUsername:(NSString *)username {
+  return [self.fingerprints objectForKey:username];
 }
 
 
