@@ -21,8 +21,6 @@
 @property (nonatomic, readonly) NSString *fingerprint;
 @property (nonatomic, strong) NSString *myName;
 
-+ (TBMultipartyProtocolManager *)sharedMultipartyProtocolManager;
-
 - (NSString *)publicKeyMessageForUsername:(NSString *)username;
 - (BOOL)addPublicKeyFromMessage:(NSString *)publicKeyMessage forUsername:(NSString *)username;
 - (NSString *)encryptMessage:(NSString *)message forUsernames:(NSArray *)usernames;
