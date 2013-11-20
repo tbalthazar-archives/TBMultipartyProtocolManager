@@ -391,6 +391,13 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)disconnectUsername:(NSString *)username {
+  [self.publicKeys removeObjectForKey:username];
+  [self.sharedSecrets removeObjectForKey:username];
+  [self.fingerprints removeObjectForKey:username];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSString *)encryptMessage:(NSString *)message forUsernames:(NSArray *)usernames {
   NSMutableData *messageData = [NSMutableData dataWithData:
                                 [message dataUsingEncoding:NSUTF8StringEncoding]];
