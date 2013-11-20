@@ -23,6 +23,7 @@
 
 - (NSString *)publicKeyMessageForUsername:(NSString *)username;
 - (BOOL)addPublicKeyFromMessage:(NSString *)publicKeyMessage forUsername:(NSString *)username;
+- (BOOL)hasPublicKeyForUsername:(NSString *)username;
 - (NSString *)encryptMessage:(NSString *)message forUsernames:(NSArray *)usernames;
 - (NSString *)decryptMessage:(NSString *)message fromUsername:(NSString *)username;
 - (NSString *)fingerprintForUsername:(NSString *)username;

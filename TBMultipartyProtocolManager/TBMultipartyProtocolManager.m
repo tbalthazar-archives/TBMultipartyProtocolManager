@@ -386,6 +386,11 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL)hasPublicKeyForUsername:(NSString *)username {
+  return [self.publicKeys objectForKey:username]!=nil;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSString *)encryptMessage:(NSString *)message forUsernames:(NSArray *)usernames {
   NSMutableData *messageData = [NSMutableData dataWithData:
                                 [message dataUsingEncoding:NSUTF8StringEncoding]];
