@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const TBErrorDomainDecryption;
+extern NSInteger const TBErrorCodeDecryptionMissingRecipients;
+extern NSInteger const TBErrorCodeDecryptionIncorrectHMAC;
+extern NSInteger const TBErrorCodeDecryptionIncorrectIV;
+extern NSInteger const TBErrorCodeDecryptionIncorrectTag;
+extern NSString * const TBMDecryptionMissingRecipientsKey;
+
 @protocol TBMultipartyProtocolManagerDelegate;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +33,9 @@
 - (BOOL)hasPublicKeyForUsername:(NSString *)username;
 - (void)disconnectUsername:(NSString *)username;
 - (NSString *)encryptMessage:(NSString *)message forUsernames:(NSArray *)usernames;
-- (NSString *)decryptMessage:(NSString *)message fromUsername:(NSString *)username;
+- (NSString *)decryptMessage:(NSString *)message
+                fromUsername:(NSString *)username
+                       error:(NSError **)error;
 - (NSString *)fingerprintForUsername:(NSString *)username;
 
 @end

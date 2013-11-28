@@ -18,6 +18,13 @@
 #import "sha.h"
 #import "rand.h"
 
+NSString * const TBErrorDomainDecryption = @"TBErrorDomainDecryption";
+NSInteger const TBErrorCodeDecryptionMissingRecipients = 13001;
+NSInteger const TBErrorCodeDecryptionIncorrectHMAC = 13002;
+NSInteger const TBErrorCodeDecryptionIncorrectIV = 13003;
+NSInteger const TBErrorCodeDecryptionIncorrectTag = 13004;
+NSString * const TBMDecryptionMissingRecipientsKey = @"TBMDecryptionMissingRecipientsKey";
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +44,8 @@
 - (NSData *)generateSharedSecretForUsername:(NSString *)username;
 - (NSString *)generateFingerprintForUsername:(NSString *)username;
 - (NSData *)hmacFromData:(NSData *)hmacData forUsername:(NSString *)username;
+- (NSArray *)checkForMissingRecipients:(TBMultipartyChatMessage *)chatMessage
+                             usernames:(NSArray *)usernames;
 - (BOOL)checkHMACForChatMessage:(TBMultipartyChatMessage *)chatMessage;
 - (BOOL)checkIVFirstUseForChatMessage:(TBMultipartyChatMessage *)chatMessage;
 - (BOOL)checkTagForChatMessage:(TBMultipartyChatMessage *)chatMessage
@@ -186,6 +195,22 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
        computed_hmac, &computed_hmac_length); // output, output length
   
   return [NSData dataWithBytes:computed_hmac length:computed_hmac_length];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSArray *)checkForMissingRecipients:(TBMultipartyChatMessage *)chatMessage
+                             usernames:(NSArray *)usernames {
+  NSMutableArray *missingUsernames = [NSMutableArray array];
+  
+  for (NSString *username in usernames) {
+    if (![chatMessage.usernames containsObject:username] ||
+        [chatMessage.ivForUsernames objectForKey:username]==nil ||
+        [chatMessage.hmacForUsernames objectForKey:username]==nil) {
+      [missingUsernames addObject:username];
+    }
+  }
+  
+  return missingUsernames;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -450,15 +475,33 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSString *)decryptMessage:(NSString *)message fromUsername:(NSString *)username {
+- (NSString *)decryptMessage:(NSString *)message
+                fromUsername:(NSString *)username
+                       error:(NSError **)error {
   TBMultipartyChatMessage *chatMessage = [[TBMultipartyChatMessage alloc]
                                           initWithJSONMessage:message senderName:username];
   
   // check HMAC
-  if (![self checkHMACForChatMessage:chatMessage]) return nil;
+  if (![self checkHMACForChatMessage:chatMessage]) {
+    if (error!=NULL) {
+      *error = [NSError errorWithDomain:TBErrorDomainDecryption
+                                   code:TBErrorCodeDecryptionIncorrectHMAC
+                               userInfo:nil];
+    }
+    return nil;
+  }
   
   // check IV reuse
-  if (![self checkIVFirstUseForChatMessage:chatMessage]) return nil;
+  if (![self checkIVFirstUseForChatMessage:chatMessage]) {
+    if (error!=NULL) {
+      *error = [NSError errorWithDomain:TBErrorDomainDecryption
+                                   code:TBErrorCodeDecryptionIncorrectIV
+                               userInfo:nil];
+    }
+    return nil;
+  }
+  
+  
   [self.usedIVs addObject:[chatMessage.ivForUsernames objectForKey:self.myName]];
   
   // get IV
@@ -471,11 +514,52 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
                                                     iv:ivData]];
   
   // check tag
-  if (![self checkTagForChatMessage:chatMessage decryptedData:decryptedData]) return nil;
+  if (![self checkTagForChatMessage:chatMessage decryptedData:decryptedData]) {
+    if (error!=NULL) {
+      *error = [NSError errorWithDomain:TBErrorDomainDecryption
+                                   code:TBErrorCodeDecryptionIncorrectTag
+                               userInfo:nil];
+    }
+    return nil;
+  }
   
   // remove padding
   NSUInteger decryptedDataLength = decryptedData.length;
   [decryptedData setLength:decryptedDataLength-64];
+  
+  // compute the recipient that should have been sent this messages
+  // all buddies in the chatroom
+  NSMutableArray *computedRecipients = [[self.publicKeys allKeys] mutableCopy];
+  [computedRecipients addObject:self.myName]; // don't forget to add myself
+  [computedRecipients removeObject:username]; // don't include the sender of the message
+  
+  // check for missing recipients (but still return the decrypted string)
+  NSArray *missingRecipients = [self checkForMissingRecipients:chatMessage
+                                                     usernames:computedRecipients];
+  
+  // -- start debug
+//  NSString *debug_decryptedMsg = [[NSString alloc] initWithData:decryptedData
+//                                                       encoding:NSUTF8StringEncoding];
+//  // simulate missing recipient
+//  if ([debug_decryptedMsg isEqualToString:@"missingRecipients"]) {
+//    missingRecipients = @[@"a missing recipient", @"another one"];
+//  }
+//  
+//  // simulate unreadable message
+//  else if ([debug_decryptedMsg isEqualToString:@"unreadable"]) {
+//    return nil;
+//  }
+  // -- end debug
+  
+  
+  if ([missingRecipients count] > 0) {
+    if (error!=NULL) {
+      NSDictionary *userInfo = @{TBMDecryptionMissingRecipientsKey: missingRecipients};
+      *error = [NSError errorWithDomain:TBErrorDomainDecryption
+                                   code:TBErrorCodeDecryptionMissingRecipients
+                               userInfo:userInfo];
+    }
+  }
   
   return [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
 }
