@@ -18,7 +18,7 @@
 //  GNU Lesser General Public License for more details.
 //
 //  You should have received a copy of the GNU Lesser General Public License
-//  along with Cryptocat for iOS.  If not, see <http://www.gnu.org/licenses/>.
+//  along with TBMultipartyProtocolManager.  If not, see <http://www.gnu.org/licenses/>.
 //
 
 void curve25519_donna(uint8_t *, const uint8_t *, const uint8_t *);
