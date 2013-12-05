@@ -104,6 +104,7 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
   if (self=[super init]) {
     // generate a private key (32 random bytes)
     uint8_t private_key[32];
+    RAND_bytes(private_key, 32);
     private_key[0] &= 248;
     private_key[31] &= 127;
     private_key[31] |= 64;
