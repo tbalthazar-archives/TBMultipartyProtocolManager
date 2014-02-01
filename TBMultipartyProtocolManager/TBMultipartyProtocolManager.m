@@ -176,7 +176,6 @@ void init_ctr(struct ctr_state *state, const unsigned char iv[12]) {
   uint8_t digest[CC_SHA512_DIGEST_LENGTH] = {0};
   CC_SHA512(publicKeyData.bytes, publicKeyData.length, digest);
   publicKeyData = [NSData dataWithBytes:digest length:CC_SHA512_DIGEST_LENGTH];
-  NSLog(@"-- publicKeyData %@ | %d bytes", publicKeyData, publicKeyData.length);
   
   // convert to hex string
   NSMutableString *hexValue = [NSMutableString string];
